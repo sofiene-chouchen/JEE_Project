@@ -1,6 +1,7 @@
 package com.polytechnique.JEE.project.category;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.polytechnique.JEE.project.book.Book;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,6 +22,7 @@ public class Category {
 
   private String name;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
   private List<Book> books;
 
