@@ -41,57 +41,55 @@
     </nav>
 
 </div>
-<div class="container mx-auto pt-10">
+<div class="container mx-auto pt-10 ">
     <div class="flex justify-between pb-10">
-        <div class="text-lg">Book available</div>
-        <button class="bg-blue-500 text-white border rounded px-4 py-2" onclick="location.href='/addBook'">Add Book
-        </button>
+        <div class="text-lg ">Users </div>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-white rounded-md overflow-hidden">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr class="text-center">
-                <th scope="col" class="px-6 py-3 border-r">Book Name</th>
-                <th scope="col" class="px-6 py-3 border-r">Language</th>
-                <th scope="col" class="px-6 py-3 border-r">Category</th>
-                <th scope="col" class="px-6 py-3 border-r">Date</th>
+            <tr>
+                <th scope="col" class="px-6 py-3 border-r">User Name</th>
+                <th scope="col" class="px-6 py-3 border-r">Role</th>
                 <th scope="col" class="px-6 py-3">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="b:${books}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 text-center even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-r" th:text="${b.name}"></th>
-                <td class="px-6 py-4 dark:text-white border-r" th:text="${b.language}"></td>
-                <td class="px-6 py-4 dark:text-white border-r" th:text="${b.category.name}"></td>
-                <td class="px-6 py-4 dark:text-white border-r" th:utext="${#dates.format(b.date, 'dd/MM/yyyy ')}"></td>
+            <tr th:each="u: ${user}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 text-center even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-r" th:text="${u.name}"></th>
+
+                <td class="px-6 py-4 border-r" th:if="${not #lists.isEmpty(u.roles)}" th:text="${u.roles[0].name}">
+                    <!-- Render the role name if the roles list is not empty -->
+                </td>
+                <td class="px-6 py-4 border-r" th:unless="${not #lists.isEmpty(u.roles)}">
+                    <!-- Render some default content or handle the case when the roles list is empty -->
+                </td>
                 <td class="px-6 py-4 flex justify-around items-center">
-                    <form th:action="@{/admin/edit/{id}(id=${b.id})}" method="post">
-                        <button type="submit" class="flex items-center bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
-                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 19c0 1.1.9 2 2 2h14a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v12z"></path>
-                            </svg>
-                            Edit
-                        </button>
-                    </form>
-                    <form th:action="@{/admin/deleteBook/{id}(id=${b.id})}" method="post">
-                        <button type="submit" class="flex items-center bg-red-500 text-white px-4 py-2 rounded-full focus:outline-none focus:shadow-outline-red active:bg-red-800">
-                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>
-                            </svg>
-                            Delete
-                        </button>
+
+                    <button class="flex items-center bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none focus:shadow-outline-yellow active:bg-yellow-800">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 19c0 1.1.9 2 2 2h14a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v12z"></path>
+                        </svg>
+                        Edit
+                    </button>
+                    <form th:action="@{/admin/deleteUser/{id}(id=${u.id})}" method="post">
+                    <button class="flex items-center bg-red-500 text-white px-4 py-2 rounded-full focus:outline-none focus:shadow-outline-red active:bg-red-800">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path>
+                        </svg>
+                        Delete
+                    </button>
                     </form>
                 </td>
-
             </tr>
             </tbody>
         </table>
     </div>
 
 
-</div>
 
+</div>
 
 </body>
 </html>

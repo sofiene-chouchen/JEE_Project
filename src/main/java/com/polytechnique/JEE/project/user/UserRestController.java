@@ -29,4 +29,8 @@ public class UserRestController {
     return service.findByRoles(roleName);
   }
 
+  @DeleteMapping("/{id}")
+  public void deleteUser(@PathVariable String id) {
+    service.deleteUser(id);
+  }
 }

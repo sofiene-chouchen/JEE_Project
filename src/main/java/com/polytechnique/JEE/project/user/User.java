@@ -1,5 +1,6 @@
 package com.polytechnique.JEE.project.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.polytechnique.JEE.project.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class User  {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private String id;

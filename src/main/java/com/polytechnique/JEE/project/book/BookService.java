@@ -47,7 +47,15 @@ public class BookService implements InterfaceService {
 
   @Override
   public Book updateBook(String id, Book book) {
-    return null;
+    Book books = bookRepository.findById(id).orElseThrow();
+    if (books != null) {
+      books.setName(book.getName());
+      books.setLanguage(book.getLanguage());
+      books.setDate(book.getDate());
+      bookRepository.save(books);
+    }
+
+    return books;
   }
 
   @Override

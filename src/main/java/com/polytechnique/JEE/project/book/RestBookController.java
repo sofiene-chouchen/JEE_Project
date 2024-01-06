@@ -29,4 +29,13 @@ public class RestBookController {
     return service.findByCategory(category);
   }
 
+  @DeleteMapping("/{id}")
+  public void deleteBook(@PathVariable String id) {
+    service.deleteBook(id);
+  }
+
+  @PatchMapping("/{id}")
+  public Book updateBook(@PathVariable String id, Book book) {
+    return service.updateBook(id, book);
+  }
 }
