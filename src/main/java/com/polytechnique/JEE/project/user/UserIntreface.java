@@ -16,6 +16,7 @@ public interface UserIntreface {
   public void updateUser(String id, User user);
 
   public List<User> findByRoles(String roleName);
+
   public Optional<User> loadUserByUsername(String username);
 
 }

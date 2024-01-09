@@ -20,7 +20,8 @@ public class UserService implements UserIntreface {
   private UserRepository repository;
   private RoleRepository roleRepository;
   private PasswordEncoder passwordEncoder;
-/////////////////////////////////// how to fix pelase
+
+  /////////////////////////////////// how to fix pelase
   @Autowired
   public UserService(RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserRepository repository) {
     this.roleRepository = roleRepository;
