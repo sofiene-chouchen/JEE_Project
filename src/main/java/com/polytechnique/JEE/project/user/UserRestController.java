@@ -24,10 +24,6 @@ public class UserRestController {
     service.addUser(user);
   }
 
-  @GetMapping("/{roleName}")
-  public List<User> getUserByRoles(@PathVariable String roleName) {
-    return service.findByRoles(roleName);
-  }
 
   @DeleteMapping("/{id}")
   public void deleteUser(@PathVariable String id) {

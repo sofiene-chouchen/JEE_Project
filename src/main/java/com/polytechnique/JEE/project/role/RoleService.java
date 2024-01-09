@@ -16,6 +16,10 @@ public class RoleService implements RoleInterface {
     return repository.findAll();
   }
 
+  public Role findByName(String name) {
+    return repository.findByName(name);
+  }
+
   @Override
   public void addRole(Role role) {
     Role newRole = Role.builder()

@@ -22,9 +22,7 @@ public class CategoryService implements CatergoryInterfaceService {
 
   @Override
   public void createCategory(Category category) {
-    Category newCategory = Category.builder()
-            .name(category.getName())
-            .build();
+    Category newCategory = Category.builder().name(category.getName()).build();
     repository.save(newCategory);
 
   }

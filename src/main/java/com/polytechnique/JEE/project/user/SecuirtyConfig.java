@@ -21,10 +21,9 @@ public class SecuirtyConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
     http.authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/swagger-ui/index.html" , "/api/v1/user/addUser").permitAll()
-                    .requestMatchers("/category", "/addCategory", "/addBook" ).hasAnyAuthority("ADMIN", "USER")
+                    .requestMatchers("/swagger-ui/**", "/api/v1/**", "/addBook ", "api/v1/user/addUser").permitAll()
                     .requestMatchers("/user").hasAuthority("ADMIN")
-                    .requestMatchers("/admin/**", "/api/v1/admin/**").hasAnyAuthority("ADMIN")
+                    .requestMatchers("/admin/**", "/api/v1/admin/**", "/category").hasAnyAuthority("ADMIN")
                     .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
@@ -32,17 +31,20 @@ public class SecuirtyConfig {
             .csrf(AbstractHttpConfigurer::disable);
     return http.build();
   }
+
   @Bean
-  public UserDetailsservice userDetailsService(){
+  public UserDetailsservice userDetailsService() {
     return new UserDetailsservice();
   }
+
   @Bean
-  PasswordEncoder passwordEncoder(){
+  PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
+
   @Bean
-  public AuthenticationProvider authenticationProvider(){
-    DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+  public AuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
     daoAuthenticationProvider.setUserDetailsService(userDetailsService());
     daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
     return daoAuthenticationProvider;

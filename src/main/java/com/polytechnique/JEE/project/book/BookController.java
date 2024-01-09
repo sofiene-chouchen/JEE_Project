@@ -35,7 +35,7 @@ public class BookController {
   }
 
 
-  @GetMapping("/category")
+  @GetMapping("/admin/category")
   public String getCategory(Model m) {
     List<Category> categoryList = categoryService.getCategory();
     m.addAttribute("category", categoryList);
@@ -59,7 +59,7 @@ public class BookController {
     return "redirect:/";
   }
 
-  @GetMapping("/addCategory")
+  @GetMapping("/admin/addCategory")
   public String addCateogry(Model model) {
     return "addCategory";
   }
@@ -75,7 +75,7 @@ public class BookController {
   }
 
 
-  @GetMapping("/user")
+  @GetMapping("/admin/user")
   public String user(Model m) {
     List<User> getAllUser = userService.getUsers();
     m.addAttribute("user", getAllUser);
@@ -107,7 +107,7 @@ public class BookController {
 
     if (bookById.isPresent()) {
       m.addAttribute("b", bookById);
-      m.addAttribute("cate" , categoryService.getCategory());
+      m.addAttribute("cate", categoryService.getCategory());
     } else {
       return "errorPage";
     }
