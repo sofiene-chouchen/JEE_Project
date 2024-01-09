@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +14,10 @@ public class RoleService implements RoleInterface {
   @Override
   public List<Role> getRolles() {
     return repository.findAll();
+  }
+
+  public Role findByName(String name) {
+    return repository.findByName(name);
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.polytechnique.JEE.project.user;
 
 
+import com.polytechnique.JEE.project.role.Role;
 import com.polytechnique.JEE.project.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,8 @@ public class UserRestController {
   public List<User> getUserByRoles(@PathVariable String roleName) {
     return service.findByRoles(roleName);
   }
+
+
 
   @DeleteMapping("/{id}")
   public void deleteUser(@PathVariable String id) {

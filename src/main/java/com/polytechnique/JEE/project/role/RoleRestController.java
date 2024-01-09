@@ -22,8 +22,12 @@ public class RoleRestController {
   }
 
   @DeleteMapping("/{id}")
-  public void deleteRole(@PathVariable String id){
+  public void deleteRole(@PathVariable String id) {
     service.deleteRole(id);
   }
 
+  @GetMapping("/{name}")
+  public Role findByName(@PathVariable String name) {
+    return service.findByName(name);
+  }
 }

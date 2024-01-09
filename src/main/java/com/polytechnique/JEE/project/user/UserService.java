@@ -5,6 +5,7 @@ import com.polytechnique.JEE.project.role.RoleRepository;
 import com.polytechnique.JEE.project.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,16 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserService implements UserIntreface {
-  UserRepository repository;
-  RoleRepository roleRepository;
- PasswordEncoder passwordEncoder;
+  private UserRepository repository;
+  private RoleRepository roleRepository;
+  private PasswordEncoder passwordEncoder;
+/////////////////////////////////// how to fix pelase
+  @Autowired
+  public UserService(RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserRepository repository) {
+    this.roleRepository = roleRepository;
+    this.passwordEncoder = passwordEncoder;
+    this.repository = repository;
+  }
 
   @Override
   public List<User> getUsers() {
@@ -29,11 +37,12 @@ public class UserService implements UserIntreface {
   public void addUser(UserDto user) {
     List<Role> roles = new ArrayList<>();
 
-    for (String i : user.getRoles()) {
-      Role testRole = roleRepository.findByName(i);
+    for (String name : user.getRoles()) {
+      Role testRole = roleRepository.findByName(name);
       if (testRole != null) {
-        Role role = testRole;
-        roles.add(role);
+        roles.add(testRole); // Use the retrieved role directly
+      } else {
+        System.out.println("Role not found for name: " + name);
       }
     }
 
@@ -45,19 +54,16 @@ public class UserService implements UserIntreface {
             .build();
 
     repository.save(newUser);
-
-
   }
 
   @Override
   public void deleteUser(String id) {
     repository.deleteById(id);
-
   }
 
   @Override
   public void updateUser(String id, User user) {
-
+    // Implement update logic if needed
   }
 
   @Override

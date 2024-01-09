@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+
 public class JeeProjectApplication {
 
   public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class JeeProjectApplication {
 //      List<String> roles= new ArrayList<>();
 //      roles.add("ADMIN");
 //      roles.add("USER");
-//      userService.addUser(new UserDto("sofi" , "sofi@gmail.com" , "123" , roles));
+//      userService.addUser(new UserDto("sofi","admin@gmail.com","1234" , ["ADMIN"])) ;
 //    };
 //
 //  }
