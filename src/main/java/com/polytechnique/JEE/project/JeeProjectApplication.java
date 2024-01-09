@@ -20,16 +20,16 @@ public class JeeProjectApplication {
     SpringApplication.run(JeeProjectApplication.class, args);
   }
 
-//  @Bean
-//  CommandLineRunner commandLineRunner(UserService userService){
-//    return args -> {
-//      List<String> roles= new ArrayList<>();
-//      roles.add("ADMIN");
-//      roles.add("USER");
-//      userService.addUser(new UserDto("sofi" , "sofi@gmail.com" , "123" , roles));
-//    };
-//
-//  }
+  @Bean
+  CommandLineRunner commandLineRunner(UserService userService){
+    return args -> {
+      List<String> roles= new ArrayList<>();
+      roles.add("ADMIN");
+      roles.add("USER");
+      userService.addUser(new UserDto("admin" , "admin@gmail.com" , "123" , roles));
+    };
+
+  }
 
 
 }

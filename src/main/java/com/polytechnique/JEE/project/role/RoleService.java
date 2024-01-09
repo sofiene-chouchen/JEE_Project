@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -28,5 +27,9 @@ public class RoleService implements RoleInterface {
   @Override
   public void deleteRole(String id) {
     repository.deleteById(id);
+  }
+
+  public Role roleByName(String name) {
+    return repository.findByName(name);
   }
 }

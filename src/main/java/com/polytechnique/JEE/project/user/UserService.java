@@ -2,6 +2,7 @@ package com.polytechnique.JEE.project.user;
 
 import com.polytechnique.JEE.project.role.Role;
 import com.polytechnique.JEE.project.role.RoleRepository;
+import com.polytechnique.JEE.project.role.RoleService;
 import com.polytechnique.JEE.project.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,8 @@ import java.util.Optional;
 public class UserService implements UserIntreface {
   UserRepository repository;
   RoleRepository roleRepository;
- PasswordEncoder passwordEncoder;
+  PasswordEncoder passwordEncoder;
+  RoleService roleService;
 
   @Override
   public List<User> getUsers() {
@@ -30,7 +32,7 @@ public class UserService implements UserIntreface {
     List<Role> roles = new ArrayList<>();
 
     for (String i : user.getRoles()) {
-      Role testRole = roleRepository.findByName(i);
+      Role testRole = roleService.roleByName(i);
       if (testRole != null) {
         Role role = testRole;
         roles.add(role);
@@ -45,19 +47,16 @@ public class UserService implements UserIntreface {
             .build();
 
     repository.save(newUser);
-
-
   }
 
   @Override
   public void deleteUser(String id) {
     repository.deleteById(id);
-
   }
 
   @Override
   public void updateUser(String id, User user) {
-
+    // Implement update logic if needed
   }
 
   @Override

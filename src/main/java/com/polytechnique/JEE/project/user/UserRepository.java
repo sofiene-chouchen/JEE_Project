@@ -11,6 +11,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
   @Query("select u from appUser u where u.roles[0].name=:roleName")
   List<User> findUserByRoles(@PathVariable String roleName);
-  @Query(value = "select * from appUser where email= ?1",nativeQuery = true)
+  @Query(value = "select * from app_user where email= ?1",nativeQuery = true)
   Optional<User> findByEmail(String email);
 }

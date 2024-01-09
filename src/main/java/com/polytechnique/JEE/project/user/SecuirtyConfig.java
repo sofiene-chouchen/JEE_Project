@@ -1,6 +1,5 @@
 package com.polytechnique.JEE.project.user;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -23,18 +22,19 @@ public class SecuirtyConfig {
 
     http.authorizeHttpRequests(auth -> auth
                     .requestMatchers("/swagger-ui/index.html" , "/api/v1/user/addUser").permitAll()
-                    .requestMatchers("category", "/addCategory", "/addBook" ).hasAnyAuthority("ADMIN", "USER")
+                    .requestMatchers("/category", "/addCategory", "/addBook" ).hasAnyAuthority("ADMIN", "USER")
                     .requestMatchers("/user").hasAuthority("ADMIN")
                     .requestMatchers("/admin/**", "/api/v1/admin/**").hasAnyAuthority("ADMIN")
+                    .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
             .formLogin(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable);
     return http.build();
   }
-@Bean
-  public UserDetailsService userDetailsService(){
-    return new UserDetailsService();
+  @Bean
+  public UserDetailsservice userDetailsService(){
+    return new UserDetailsservice();
   }
   @Bean
   PasswordEncoder passwordEncoder(){
