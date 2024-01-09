@@ -32,4 +32,8 @@ public class RoleService implements RoleInterface {
   public void deleteRole(String id) {
     repository.deleteById(id);
   }
+
+  public Role roleByName(String name) {
+    return repository.findByName(name);
+  }
 }
